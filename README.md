@@ -1,4 +1,4 @@
-# hng-shop01
+
 # HNG-SHOP 🚀
 A Modern E-Commerce Platform
 
