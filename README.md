@@ -9,7 +9,7 @@ A Modern E-Commerce Platform
 - Fast & SEO Friendly
 
 ## 🚀 Live Demo
-Coming soon on Netlify
+Coming soon on Vercel
 
 ## 🛠️ Tech Stack
 - Next.js
