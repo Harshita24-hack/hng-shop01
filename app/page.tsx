@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
+import Link from "next/link";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -9,7 +10,7 @@ const supabase = createClient(
 
 export default function Home() {
   const [products, setProducts] = useState<any[]>([]);
-  const [cart, setCart] = useState<number>(0);
+  const [cart, setCart] = useState<any[]>([]);
 
   useEffect(() => {
     async function getProducts() {
@@ -17,17 +18,27 @@ export default function Home() {
       if (data) setProducts(data);
     }
     getProducts();
+    const saved = localStorage.getItem("cart");
+    if (saved) setCart(JSON.parse(saved));
   }, []);
 
+  const addToCart = (product: any) => {
+    const newCart = [...cart, {...product, quantity: 1 }];
+    setCart(newCart);
+    localStorage.setItem("cart", JSON.stringify(newCart));
+  };
+
   return (
-    <div className="min-h-screen bg-[#f6f3ee]"> {/* OFF WHITE background */}
+    <div className="min-h-screen bg-[#f6f3ee]">
       {/* NAVBAR */}
       <nav className="bg-white border-b border-black/5 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <h1 className="text-3xl font-black tracking-tight text-black">HNG-SHOP<span className="text-blue-600">.</span></h1>
-          <button className="bg-black text-white px-6 py-2.5 rounded-full font-bold">
-            Cart ({cart})
-          </button>
+          <Link href="/cart">
+            <button className="bg-black text-white px-6 py-2.5 rounded-full font-bold">
+              Cart ({cart.length})
+            </button>
+          </Link>
         </div>
       </nav>
 
@@ -46,7 +57,7 @@ export default function Home() {
                 <p className="text-[14px] text-[#666] mt-1 font-medium">{p.description}</p>
                 <div className="flex justify-between items-center mt-5">
                   <span className="text-[20px] font-black text-black">₹{p.price}</span>
-                  <button onClick={()=>setCart(cart+1)} className="bg-[#0a66ff] hover:bg-black text-white px-5 py-2.5 rounded-full text-[13px] font-black tracking-wide transition-colors">
+                  <button onClick={()=>addToCart(p)} className="bg-[#0a66ff] hover:bg-black text-white px-5 py-2.5 rounded-full text-[13px] font-black tracking-wide transition-colors">
                     Add to Cart
                   </button>
                 </div>
