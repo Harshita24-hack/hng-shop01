@@ -9,7 +9,7 @@ A Modern E-Commerce Platform
 - Fast & SEO Friendly
 
 ## 🚀 Live Demo
-Coming soon on Vercel
+ Vercel:https://hng-shop01-5no602juw-harshita-5b52.vercel.app/
 
 ## 🛠️ Tech Stack
 - Next.js
