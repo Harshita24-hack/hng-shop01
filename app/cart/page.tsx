@@ -40,28 +40,45 @@ export default function CartPage() {
   }
 
   const lines = rows
-    .map((r) => ({ row: r, product: products.find((p) => String(p.id) === r.product_id) }))
+    .map((r) => ({
+      row: r,
+      product: products.find((p) => String(p.id) === r.product_id),
+    }))
     .filter((l) => l.product);
 
-  const total = lines.reduce((s, l) => s + Number(l.product.price) * l.row.quantity, 0);
+  const total = lines.reduce(
+    (s, l) => s + Number(l.product.price) * l.row.quantity,
+    0
+  );
 
-  if (loading) return <div className="p-10 text-center">Loading...</div>;
+  if (loading) return <div className="p-10 text-center text-black">Loading...</div>;
+
   if (!loggedIn)
     return (
-      <div className="p-10 text-center">
-        Please <Link href="/login" className="underline font-bold">sign in</Link> to see your cart.
+      <div className="p-10 text-center text-black">
+        Please{" "}
+        <Link href="/login" className="underline font-bold">
+          sign in
+        </Link>{" "}
+        to see your cart.
       </div>
     );
+
   if (lines.length === 0)
     return (
-      <div className="p-10 text-center">
-        Cart is empty. <Link href="/" className="underline font-bold">Back to shop</Link>
+      <div className="p-10 text-center text-black">
+        Cart is empty.{" "}
+        <Link href="/" className="underline font-bold">
+          Back to shop
+        </Link>
       </div>
     );
 
   return (
-    <div className="p-6 max-w-2xl mx-auto">
-      <Link href="/" className="underline text-sm">← Back to shop</Link>
+    <div className="p-6 max-w-2xl mx-auto text-black">
+      <Link href="/" className="underline text-sm">
+        ← Back to shop
+      </Link>
       <h1 className="text-2xl font-bold my-6">Your Cart</h1>
       {lines.map(({ row, product }) => (
         <div key={row.id} className="flex justify-between items-center border-b py-3">
@@ -70,10 +87,16 @@ export default function CartPage() {
             <div className="text-sm text-gray-500">₹{product.price}</div>
           </div>
           <div className="flex items-center gap-3">
-            <button onClick={() => changeQty(row, -1)} className="border rounded px-2">−</button>
+            <button onClick={() => changeQty(row, -1)} className="border rounded px-2">
+              −
+            </button>
             <span>{row.quantity}</span>
-            <button onClick={() => changeQty(row, 1)} className="border rounded px-2">+</button>
-            <button onClick={() => remove(row)} className="text-red-600 text-sm ml-2">Remove</button>
+            <button onClick={() => changeQty(row, 1)} className="border rounded px-2">
+              +
+            </button>
+            <button onClick={() => remove(row)} className="text-red-600 text-sm ml-2">
+              Remove
+            </button>
           </div>
         </div>
       ))}
