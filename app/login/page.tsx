@@ -23,27 +23,33 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f6f3ee] flex items-center justify-center p-6">
-      <div className="bg-white rounded-[20px] p-8 w-full max-w-sm shadow-lg">
-        <h1 className="text-2xl font-black mb-6">Sign in</h1>
+    <div className="min-h-screen bg-[#f6f3ee] flex items-center justify-center p-6 text-black">
+      <div className="bg-white text-black rounded-[20px] p-8 w-full max-w-sm shadow-lg">
+        <h1 className="text-2xl font-black mb-6 text-black">Sign in</h1>
         <input
-          className="w-full border rounded-lg p-3 mb-3"
+          className="w-full border border-gray-300 rounded-lg p-3 mb-3 text-black placeholder-gray-500 bg-white"
           placeholder="Email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
-          className="w-full border rounded-lg p-3 mb-4"
+          className="w-full border border-gray-300 rounded-lg p-3 mb-4 text-black placeholder-gray-500 bg-white"
           placeholder="Password (min 6 characters)"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={signIn} className="w-full bg-black text-white rounded-full py-3 font-bold mb-2">
+        <button
+          onClick={signIn}
+          className="w-full bg-black text-white rounded-full py-3 font-bold mb-2"
+        >
           Sign in
         </button>
-        <button onClick={signUp} className="w-full border border-black rounded-full py-3 font-bold">
+        <button
+          onClick={signUp}
+          className="w-full border border-black text-black bg-white rounded-full py-3 font-bold"
+        >
           Create account
         </button>
         {msg && <p className="text-sm text-red-600 mt-4">{msg}</p>}
